@@ -5,13 +5,24 @@ public class Bronze{
     int[] R_s;
     int[] C_s;
     int[] D_s;
-    public Bronze(String input){
-	Scanner input = new Scanner(new File(input));
-	while (fileScanner.hasNextInt()){    
-	}
+    public Bronze(String fileName){
+	Scanner in = new Scanner(new File(fileName));
+	String line = in.nextLine();  
+	R = line.nextInt();
+	C = line.nextInt();
+	E = line.nextInt();
+	N = line.nextInt();
+	
+
+	    
+	
+	    
     }
 
+
+
     public static void main(String[] args){
-	System.out.println(Bronze(args[0]));
+	Bronze b = new Bronze(args[0]);
+	System.out.println(b.solve() + ",7,Lum,Harry");
     }
 }
