@@ -20,24 +20,31 @@ public class Maze{
       3. When the file is not found, print an error and exit the program.
     */
     public Maze(String filename, boolean ani){
-	File file = new File(filename)
+	File file = new File(filename);
 	Scanner in = new Scanner(file);
 	int R = 0;
 	int C = 0;
-	String mazeString = ""
+	startx = -1;
+	starty = -1;
+	ArrayList<String> mazeArray = new ArrayList<String>;
 	while (in.hasNextLine()){	    
-	    mazeString += in.nextLine() + "\n";
+	    mazeArray.add(in.nextLine());
 	    R++;
 	}
+	C = mazeArray.get(0).length();
 	in.close();
 	
 	maze = new char[R][C];
 	
 	//string.split
+	
 	for (int i = 0; i < R; i++){
-	    
 	    for (int j = 0; j < C; j++){
-		
+		maze[i][j] = mazeArray.get(i).charAt(j);
+		if (maze[i][j] == 'S'){
+		    startx = i;
+		    starty = j;
+		}
 	    }
 	}
 	
@@ -50,7 +57,7 @@ public class Maze{
     /*Main Solve Function
 
       Things to note:
-       When no S is contained in maze, print an error and return false.
+      When no S is contained in maze, print an error and return false.
     */
     public boolean solve(){
         if(startx < 0){
@@ -69,11 +76,11 @@ public class Maze{
       The S is replaced with '@' but the 'E' is not.
 
       Postcondition:
-        Returns true when the maze is solved,
-        Returns false when the maze has no solution.
+      Returns true when the maze is solved,
+      Returns false when the maze has no solution.
 
-        All visited spots that were not part of the solution are changed to '.'
-        All visited spots that are part of the solution are changed to '@'
+      All visited spots that were not part of the solution are changed to '.'
+      All visited spots that are part of the solution are changed to '@'
 
     */
     private boolean solve(int x, int y){
@@ -81,6 +88,7 @@ public class Maze{
             System.out.println(this);
             wait(20);
         }
+	
 
         //COMPLETE SOLVE
 
