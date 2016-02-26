@@ -32,9 +32,8 @@ public class QueenBoard{
 	    if (addQueen(i, col)){
 		return solveH(col + 1);
 	    }
-	    if (board[i][col] == 1){
-	        removeQueen(i,col);
-            }
+	    removeQueen(i,col);
+
 	}
 
 	if (col == 0){
