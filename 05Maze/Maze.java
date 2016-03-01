@@ -20,36 +20,38 @@ public class Maze{
       3. When the file is not found, print an error and exit the program.
     */
     public Maze(String filename, boolean ani){
-	File file = new File(filename);
-	Scanner in = new Scanner(file);
-	int R = 0;
-	int C = 0;
-	startx = -1;
-	starty = -1;
-	ArrayList<String> mazeArray = new ArrayList<String>;
-	while (in.hasNextLine()){	    
-	    mazeArray.add(in.nextLine());
-	    R++;
-	}
-	C = mazeArray.get(0).length();
-	in.close();
+	try{
+	    File file = new File(filename);
+	    Scanner in = new Scanner(file);
+	    int R = 0;
+	    int C = 0;
+	    startx = -1;
+	    starty = -1;
+	    ArrayList<String> mazeArray = new ArrayList<String>();
+	    while (in.hasNextLine()){	    
+		mazeArray.add(in.nextLine());
+		C++;
+	    }
+	    R = mazeArray.get(0).length();
+	    in.close();
 	
-	maze = new char[R][C];
+	    maze = new char[R][C];
 	
-	//string.split
-	
-	for (int i = 0; i < R; i++){
-	    for (int j = 0; j < C; j++){
-		maze[i][j] = mazeArray.get(i).charAt(j);
-		if (maze[i][j] == 'S'){
-		    startx = i;
-		    starty = j;
+	    for (int i = 0; i < R; i++){
+		for (int j = 0; j < C; j++){
+		    maze[i][j] = mazeArray.get(j).charAt(i);
+		    if (maze[i][j] == 'S'){
+			startx = i;
+			starty = j;
+		    }
 		}
 	    }
+	
+	
+	    animate = ani;
+	}catch(FileNotFoundException e){
+	    e.printStackTrace();
 	}
-	
-	
-	animate = ani;
 
     }
 
@@ -88,14 +90,49 @@ public class Maze{
             System.out.println(this);
             wait(20);
         }
+	if (maze[x][y] == 'E'){
+	    return true;
+	}
+	maze[x][y] = '@';
 	
-
         //COMPLETE SOLVE
-
+	if (okSpot(x-1,y)){
+	    return solve(x-1,y);
+	}
+	if (okSpot(x,y-1)){
+	    return solve(x,y-1);
+	}
+	if (okSpot(x+1,y)){
+	    return solve(x+1,y);
+	}
+	if (okSpot(x,y+1)){
+	    return solve(x,y+1);
+	}
+	
+	maze[x][y] = '.';
+	
+	if (maze[x-1][y] == '@'){
+	    return solve(x-1,y);
+	}
+	if (maze[x][y-1] == '@'){
+	    return solve(x,y-1);
+	}
+	if (maze[x+1][y] == '@'){
+	    return solve(x+1,y);
+	}
+	if (maze[x][y+1] == '@'){
+	    return solve(x,y+1);
+	}
+	
+	    
+	
         return false; //so it compiles
     }
-
-
+	
+    private boolean okSpot(int x, int y){
+        return maze[x][y] == ' ' || maze[x][y] == 'E';
+	
+    }
 
     //FREE STUFF!!! *you should be aware of this*
 
