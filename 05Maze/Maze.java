@@ -88,7 +88,8 @@ public class Maze{
     private boolean solve(int x, int y){
         if(animate){
             System.out.println(this);
-            wait(20);
+            wait(40);
+	    clearTerminal();
         }
 	if (maze[x][y] == 'E'){
 	    return true;
@@ -125,7 +126,7 @@ public class Maze{
 	}
 	
 	    
-	
+
         return false; //so it compiles
     }
 	
