@@ -50,7 +50,7 @@ public class Sorts{
 	}
     }
     public static void merge(int[] data, int startA, int endA, int startB, int endB){
-	int[] temp = new int[endB - endA + 1];
+	int[] temp = new int[endB - startA + 1];
 	int x = startA;
 	int y = startB;
 	int z = 0;
@@ -58,21 +58,55 @@ public class Sorts{
 	    while (x < endA + 1 && y < endB + 1){
 		if (data[x] >= data[y]){
 		    temp[z] = data[y];
+		    
 		    y++;
 		}else{
 		    temp[z] = data[x];
 		    x++;
 		}
 		z++;
-	    }else{
-		break;
-	    }	    
+	    }
+	    
 	}
+
 	
+	if (x < endA + 1){
+	    while (x < endA + 1){
+	 	temp[z] = data[x];
+	 	x++;
+	 	z++;
+	    }
+	}
+	if (y < endB + 1){
+	    while (y < endB + 1){
+	 	temp[z] = data[y];
+	 	y++;
+	 	z++;
+	    }
+	}
+	for (int i = 0; i < temp.length; i++){
+	    data[startA + i] = temp[i];
+	}
+    }
+
+    public static void mergeSort(int[] data){
+	mergeSortHelper(data,0,data.length - 1);
+    }
+    
+    public static void mergeSortHelper(int[] data, int start, int end){
+	if (start != end){
+	    mergeSortHelper(data,start,(start + end) / 2);
+	    mergeSortHelper(data,(start+end)/2 + 1, end);
+	}
+	merge(data,start,(start+end)/2,(start + end)/2+1,end);
     }
     
     public static void main(String[]args){
-	int[] x = {3,5,1,2,6,7,4};
+	int[] x = {6,4,2,3,5,7,1,1,2,2,2,3,1,3,4,5,6,7};
+	mergeSort(x);
+	for (int i = 0; i< x.length; i++){
+	    System.out.print(x[i]);
+	}
 	//InsertionSort(x);
         //SelectionSort(x);
 	//BubbleSort(x);
