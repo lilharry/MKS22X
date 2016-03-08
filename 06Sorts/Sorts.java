@@ -89,7 +89,7 @@ public class Sorts{
 	}
     }
 
-    public static void mergeSort(int[] data){
+    public static void mergesort(int[] data){
 	mergeSortHelper(data,0,data.length - 1);
     }
     
@@ -103,7 +103,7 @@ public class Sorts{
     
     public static void main(String[]args){
 	int[] x = {6,4,2,3,5,7,1,1,2,2,2,3,1,3,4,5,6,7};
-	mergeSort(x);
+	mergesort(x);
 	for (int i = 0; i< x.length; i++){
 	    System.out.print(x[i]);
 	}
