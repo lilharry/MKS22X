@@ -1,0 +1,34 @@
+import java.io.*;
+import java.util.*;
+
+public class Quick{
+    public static int partition(int[]data,int left,int right){
+	Random r = new Random();
+	int pivotIndex = left + r.nextInt(right - left + 1);
+	int pivot = data[pivotIndex];
+	while(true){
+	    for (int i = 0; i < pivot; i++){
+		if (data[i] > pivot){
+		    break;
+		}
+	    }
+	    for (int j = pivotIndex; j < data.length; j++){
+	    	if (data[j] < pivot){
+		    break;
+		}
+	    }
+	    if(data[i] > data[j]){
+		break;
+	    }else{
+		swap(data,i,j);
+	    }
+	
+	}
+	return pivotIndex;
+    }
+    public static void swap(int[]data,int i,int j){
+	int temp = data[i];
+	data[i] = data[j];
+	data[j] = temp;
+	
+    }
