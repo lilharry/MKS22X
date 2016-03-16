@@ -1,0 +1,86 @@
+public class MyLinkedList{
+    private class LNode{
+	int data;
+	LNode next;
+	
+
+	LNode(int data, LNode next){
+	    this.data = data;
+	    this.next = next;
+	}
+	
+	void setValue(int data){
+	    this.data = data;
+	}
+	void setNext(LNode next){
+	    this.next = next;
+	}
+
+	int getValue(){
+	    return data;
+	}
+
+	LNode getNext(){
+	    return next;
+	}
+	
+	
+    }
+    
+    //LinkedList class
+    
+    //begin
+    private LNode start;
+    //end
+    private int size;
+
+    public MyLinkedList{
+	start = 0;
+	size = 0;
+	
+	
+    }
+
+
+
+    //add new LNode
+    public boolean add(int value){
+	return add(size,value);
+    }
+
+    public boolean add(int index,int value){
+	if (index == 0){
+	    LNode x = new LNode(value,start);
+	    head = x;
+	    size++;
+	    return true;
+	}
+
+	if (index <= size){
+	    LNode current = start;
+	    int x = 0;
+	    while (x < index){ //FIX THIS
+		current = current.getNext();
+	        x++;
+	    }
+	    LNode x = new LNode(value,current.getNext());
+	    current.setNext(x);
+	    size++;
+	    return true;
+	}
+	return false;
+	
+    }
+
+    public void toString(){
+	LNode current = start;
+	System.out.print("[");
+
+	for (int i = 0; i < size; i++){
+	    System.out.print(current.data() + ", ");
+	    current = current.getNext();
+	}
+	System.out.print("]");
+    }
+    
+}
