@@ -1,15 +1,15 @@
-public class MyLinkedList{
+public class MyLinkedList<T>{
     private class LNode{
-	int data;
-	LNode next;
+	private T data;
+	private LNode next;
 	
 
-	LNode(int data, LNode next){
+	LNode(T data, LNode next){
 	    this.data = data;
 	    this.next = next;
 	}
 	
-	void setValue(int data){
+	void setValue(T data){
 	    this.data = data;
 	}
 	void setNext(LNode next){
@@ -46,11 +46,11 @@ public class MyLinkedList{
 
 
     //add new LNode
-    public boolean add(int value){
+    public boolean add(T value){
 	return add(size,value);
     }
 
-    public boolean add(int index,int value){
+    public boolean add(int index,T value){
 	if (index == 0){
 	    LNode x = new LNode(value,start);
 	    start = x;
@@ -81,14 +81,14 @@ public class MyLinkedList{
 	return ans;
     }
 
-    public int get(int index){
+    public T get(int index){
 	int i = 0;
 	LNode current = loopTo(index);
 	return current.getValue();
     }
-    public int set(int index, int newValue){
+    public T set(int index, T newValue){
 	LNode current = loopTo(index);
-	int old = current.getValue();
+	T old = current.getValue();
 	current.setValue(newValue);
 	return old;
     }
@@ -96,11 +96,11 @@ public class MyLinkedList{
 	return size;
     }
     
-    public int indexOf(int value){
+    public int indexOf(T value){
 	int i = 0;
 	LNode current = start;
 	while (i < size){
-	    if (current.getValue() == value){
+	    if (current.getValue().equals(value)){
 		return i;
 	    }
 	    current = current.getNext();
@@ -109,9 +109,9 @@ public class MyLinkedList{
 	return -1;
     }
 
-    public int remove(int index){
+    public T remove(int index){
 	LNode current = loopTo(index - 1);
-	int old = current.getNext().getValue();
+	T old = current.getNext().getValue();
 	current.setNext(current.getNext().getNext());
 	size--;
 	return old;
@@ -128,21 +128,22 @@ public class MyLinkedList{
 	return current;
     }
     public static void main(String[] args){
-	MyLinkedList x = new MyLinkedList();
-	x.add(4);
+
+	MyLinkedList<String> x = new MyLinkedList<String>();
+	x.add("4");
 	System.out.println(x.toString());
-	x.add(5);
-	x.add(6);
+	x.add("5");
+	x.add("6");
 	System.out.println(x.toString());
-	x.add(1,100);
+	x.add(1,"100");
 	System.out.println(x.toString());
-	x.set(1,0);
+	x.set(1,"0");
 	System.out.println(x.toString());
 	System.out.println(x.get(3));
-	x.set(3,0);
+	x.set(3,"0");
 	System.out.println(x.toString());
 	System.out.println(x.indexOf(5));
-	x.set(1,5);
+	x.set(1,"5");
 	System.out.println(x.indexOf(0));
 	System.out.println(x.toString());
 	System.out.println(x.remove(3));
@@ -150,7 +151,8 @@ public class MyLinkedList{
 	System.out.println(x.remove(1));
 	System.out.println(x.toString());
 	System.out.println(x.size());
-	x.add(3,100);
+	x.add(3,"100");
 	System.out.println(x.toString());
+   
     }
 }
