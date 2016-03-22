@@ -1,3 +1,5 @@
+import java.io.*;
+import java.lang.*;
 public class MyLinkedList<T>{
     private class LNode{
 	private T data;
@@ -16,7 +18,7 @@ public class MyLinkedList<T>{
 	    this.next = next;
 	}
 
-	int getValue(){
+	T getValue(){
 	    return data;
 	}
 
@@ -59,7 +61,7 @@ public class MyLinkedList<T>{
 	}
 
 	if (index <= size){
-	    LNode current = loopTo(index - 1);
+	    LNode current = loopToAdd(index - 1);
 	    LNode x = new LNode(value,current.getNext());
 	    current.setNext(x);
 	    size++;
@@ -119,40 +121,31 @@ public class MyLinkedList<T>{
 
     //returns LNode at given index
     private LNode loopTo(int index){
-	int i = 0;
-	LNode current = start;
-	while (i < index){
-	    current = current.getNext();
-	    i++;
+	if (index < size){
+		
+	    int i = 0;
+	    LNode current = start;
+	    while (i < index){
+		current = current.getNext();
+		i++;
+	    }
+	    return current;
+	}else{
+	    throw new IndexOutOfBoundsException();
 	}
-	return current;
     }
-    public static void main(String[] args){
-
-	MyLinkedList<String> x = new MyLinkedList<String>();
-	x.add("4");
-	System.out.println(x.toString());
-	x.add("5");
-	x.add("6");
-	System.out.println(x.toString());
-	x.add(1,"100");
-	System.out.println(x.toString());
-	x.set(1,"0");
-	System.out.println(x.toString());
-	System.out.println(x.get(3));
-	x.set(3,"0");
-	System.out.println(x.toString());
-	System.out.println(x.indexOf(5));
-	x.set(1,"5");
-	System.out.println(x.indexOf(0));
-	System.out.println(x.toString());
-	System.out.println(x.remove(3));
-	System.out.println(x.toString());
-	System.out.println(x.remove(1));
-	System.out.println(x.toString());
-	System.out.println(x.size());
-	x.add(3,"100");
-	System.out.println(x.toString());
-   
+    private LNode loopToAdd(int index){
+	if (index <= size && 0 <= index){
+		
+	    int i = 0;
+	    LNode current = start;
+	    while (i < index){
+		current = current.getNext();
+		i++;
+	    }
+	    return current;
+	}else{
+	    throw new IndexOutOfBoundsException();
+	}
     }
 }
