@@ -59,15 +59,12 @@ public class MyLinkedList<T>{
 	    size++;
 	    return true;
 	}
+	LNode current = loopToAdd(index - 1);
+	LNode x = new LNode(value,current.getNext());
+	current.setNext(x);
+	size++;
+	return true;
 
-	if (index <= size){
-	    LNode current = loopToAdd(index - 1);
-	    LNode x = new LNode(value,current.getNext());
-	    current.setNext(x);
-	    size++;
-	    return true;
-	}
-	return false;
 	
     }
 
@@ -94,6 +91,7 @@ public class MyLinkedList<T>{
 	current.setValue(newValue);
 	return old;
     }
+
     public int size(){
 	return size;
     }
@@ -112,6 +110,12 @@ public class MyLinkedList<T>{
     }
 
     public T remove(int index){
+	if (index == 0){
+	    T old = start.getValue();
+	    start = start.getNext();
+	    size--;
+	    return old;
+	}
 	LNode current = loopTo(index - 1);
 	T old = current.getNext().getValue();
 	current.setNext(current.getNext().getNext());
@@ -121,7 +125,7 @@ public class MyLinkedList<T>{
 
     //returns LNode at given index
     private LNode loopTo(int index){
-	if (index < size){
+	if (index < size && 0 <= index){
 		
 	    int i = 0;
 	    LNode current = start;
