@@ -1,32 +1,55 @@
+import java.io.*;
+import java.util.*;
+
+
 public class ParenDemo{
     public static boolean isMatching(String s){
-	String paren = "";
-	for (int i = 0; i<s.length();i++){
-	    String x = s.substring(i,i+1);
-	    if ("({[<>]})".contains(x)){
-		paren += x;
-	    }
-	}
+	MyStack<Character> parens = new MyStack<Character>();
+	for (char next : s.toCharArray()){
+	    if (next == ')' ||
+		next == '}' ||
+		next == ']' ||
+		next == '>'){
+		try{
+		    if (parens.pop() != expectedChar(next)){
 
-
-	MyStack<String> stack = new MyStack<String>();
-	String open = "({[<";
-	String close= ")}]>";
-	for (int i = 0; i<paren.length();i++){
-	    String x = paren.substring(i,i+1);
-	    if (open.contains(x)){
-		stack.push(x);
-	    }else{
-		if (close.indexOf(x) == stack.peek().indexOf(x)){
-		    stack.pop();
-		}else{
+			return false;
+		    }
+		}catch(NoSuchElementException e){
 		    return false;
 		}
+		
+	    } 
+	    if (next == '(' ||
+		next == '{' ||
+		next == '[' ||
+		next == '<'){
+		parens.push(next);
 	    }
+	    
+	    
 	}
-	return !(open.contains(stack.pop()));
+	return parens.isEmpty();
 
 	
+
+    }
+
+    private static char expectedChar(char x){
+	if (x == '}'){
+	    return '{';
+	}
+	if (x == ')'){
+	    return '(';
+	}
+	if (x == '>'){
+	    return '<';
+	}
+	if (x == ']'){
+	    return '[';
+	}
+	
+	throw new IllegalArgumentException();
 
     }
     public static void main(String[]args){
