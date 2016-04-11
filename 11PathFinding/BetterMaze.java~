@@ -1,0 +1,22 @@
+public class BetterMaze{
+    private char[][] maze;
+    private int[] solution;
+    private int startRow,startCol;
+    private Frontier placesToGo;
+    private boolean animate;
+
+    public int[] solutionCoordinates(){
+    }
+
+    public boolean solveBFS(boolean animate){}
+
+    public boolean solveDFS(boolean animate){}
+    
+    public boolean solveBFS(){
+    }
+    
+    public boolean solveDFS(){
+    }
+
+
+}
