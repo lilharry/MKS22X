@@ -2,12 +2,16 @@ import java.util.*;
 import java.io.*;
 public class BetterMaze{
 
-    //node
     private class Node{
-	private int location;
+	private int r,c,;
 	private Node previous;
-	Node(int location,Node previous){
-	    this.location = location;
+	public Node(int r, int c){
+	    this.r = r;
+	    this.c = c;
+	}
+	public Node(int r, int c,Node previous){
+	    this.r = r;
+	    this.c = c;
 	    this.previous = previous;
 	}
 	
@@ -15,8 +19,11 @@ public class BetterMaze{
 	    return previous;
 	}
 	
-	public int getValue(){
-	    return location;
+	public int getRow(){
+	    return r;
+	}
+	public int getCol(){
+	    return c;
 	}
 
     }
@@ -36,6 +43,7 @@ public class BetterMaze{
      *Postcondition:  the correct solution is in the returned array
     **/
     public int[] solutionCoordinates(){
+	
 	return solution;
     }    
 
@@ -43,8 +51,10 @@ public class BetterMaze{
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-        /** IMPLEMENT THIS **/      
-	return false;
+        /** IMPLEMENT THIS **/
+
+	placesToGo = new FrontierQueue<Node>();
+	return solve();
     }   
 
 
@@ -52,7 +62,9 @@ public class BetterMaze{
     */ 
     public boolean solveDFS(){  
         /** IMPLEMENT THIS **/  
-	return false;
+
+	placesToGo = new FrontierStack<Node>();
+	return solve();
     }    
 
    /**Search for the end of the maze using the frontier. 
@@ -60,8 +72,19 @@ public class BetterMaze{
     **/
     private boolean solve(){  
         /** IMPLEMENT THIS **/  
+	//add start node to frontier
+	
+	Node start = new Node(startRow,startCol);
+	placesToGo.add(start);
+
+	while (placesToGo.hasNext()){
+	    
+	
 	return false;
-    }    
+    }
+    private Node[] getSurroundings(Node n){
+	if (
+    }
      
    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){
