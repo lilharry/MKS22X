@@ -3,7 +3,7 @@ import java.io.*;
 public class BetterMaze{
 
     private class Node{
-	private int r,c,;
+	private int r,c;
 	private Node previous;
 	public Node(int r, int c){
 	    this.r = r;
@@ -78,12 +78,48 @@ public class BetterMaze{
 	placesToGo.add(start);
 
 	while (placesToGo.hasNext()){
+	    Node n = placesToGo.next();
+	    if (maze[n.getRow()][n.getCol()] == 'E'){
+		n = n.getPrevious();
+		while (n != null){
+		    maze[n.getRow()][n.getCol()] = '@';
+		    n = n.getPrevious();
+		}
+		
+		return true;
+	    }
+	    for (Node nodes : getSurroundings(n)){
+		placesToGo.add(nodes);
+	    }
+		
+	}
+	    
 	    
 	
 	return false;
     }
-    private Node[] getSurroundings(Node n){
-	if (
+    private ArrayList<Node> getSurroundings(Node n){
+	int x = n.getRow();
+	int y = n.getCol();
+	ArrayList<Node> nodes = new ArrayList<Node>();
+	if (okSpot(x-1,y)){
+	    nodes.add(new Node(x-1,y,n));
+	}
+	if (okSpot(x,y-1)){
+	    nodes.add(new Node(x,y-1,n));
+	}
+	if (okSpot(x+1,y)){
+	    nodes.add(new Node(x+1,y,n));
+	}
+	if (okSpot(x,y+1)){
+	    nodes.add(new Node(x,y+1,n));
+	}
+	return nodes;
+
+    }
+
+    private boolean okSpot(int x, int y){
+	return maze[x][y] == ' ' || maze[x][y] == 'E';
     }
      
    /**mutator for the animate variable  **/
@@ -189,8 +225,12 @@ public class BetterMaze{
     
 
 
-       
-    
+
+
+    public static void main(String[]args){
+	BetterMaze maze = new BetterMaze("MazeTest.txt");
+	maze.solveBFS();
+    }
     
 
 }

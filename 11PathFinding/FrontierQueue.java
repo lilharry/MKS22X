@@ -7,7 +7,7 @@ public class FrontierQueue<T> implements Frontier<T>{
 	frontier.enqueue(element);
     }
     public T next(){
-	return frontier.peek();
+	return frontier.dequeue();
     }
     public boolean hasNext(){
 	return frontier.isEmpty();
