@@ -43,14 +43,14 @@ public class BSTree<T extends Comparable<T>>{
 
 	
 	public int height(){
-	    if (left == null && right == null){
+	    if (left == null && right == null){ //if no children
 		return 1;
 	    }else{
-		if (right == null){
+		if (right == null){ //if only left child
 		    return left.height() + 1;
-		}else if (left == null){
+		}else if (left == null){ //if only right child
 		    return right.height() + 1;
-		}else{
+		}else{         //if both children
 		    return Math.max(left.height(),right.height()) + 1;
 		}
 	    }
