@@ -12,16 +12,52 @@ public class BSTree<T extends Comparable<T>>{
 	    left = leaf1;
 	    right = leaf2;
 	}
+
+
+	public T setValue(T value){
+	    T temp = data;
+	    data = value;
+	    return temp;
+	}
+
+	public T getValue(){
+	    return data;
+	}
+
+	public void setLeft(Node node){
+	    left = node;
+	}
+
+	public void setRight(Node node){
+	    right = node;
+	}
+	
+	public Node getLeft(){
+	    return left;
+	}
+	
+	public Node getRight(){
+	    return right;
+	}
+
+
+	
 	public int height(){
 	    if (left == null && right == null){
 		return 1;
 	    }else{
-		return Math.max(left.height(),right.height()) + 1;
+		if (right == null){
+		    return left.height() + 1;
+		}else if (left == null){
+		    return right.height() + 1;
+		}else{
+		    return Math.max(left.height(),right.height()) + 1;
+		}
 	    }
 	}
 
 	public void add(T value){
-	    if (value < data){
+	    if (value.compareTo(data) < 0){
 		if (left == null){
 		    left = new Node(value);
 		}else{
@@ -40,7 +76,7 @@ public class BSTree<T extends Comparable<T>>{
 	
 	public String toString(){
 	    String ans = "";
-	    ans += value + " ";
+	    ans += data + " ";
 
 	    if (left == null){
 		ans += "_ ";
@@ -58,13 +94,74 @@ public class BSTree<T extends Comparable<T>>{
 	}
 
 	public boolean contains(T value){
-	    if (value.equals(value)){
+	    if (data.equals(value)){
 		return true;
 	    }
-	    try{ //fix
-		marker = left.contains(value) || right.contains(value);
-	    }catch(NullPointerException e){
+	    
+	    boolean contains = false;
+
+	    if (value.compareTo(data) < 0){
+		if (left != null){
+		    contains = left.contains(value);
+		}
+	    }else{
+		if (right != null){
+		    contains = right.contains(value);
+		}
 	    }
+	    return contains;
+	}
+	public boolean remove(T value, Node parent){
+	    if (contains(value)){
+		
+		if (value.compareTo(data) == 0){
+		    if (left != null && right != null){
+			data = right.min();
+			right.remove(data,this);
+     		    }else{
+			if (parent.left == this){
+			    if (this.left != null){
+				parent.left = left;
+			    }else{
+				parent.left = right;
+			    }
+			}
+			if (parent.right == this){
+			    if (this.left != null){
+				parent.right = left;
+			    }else{
+				parent.right = right;
+			    }
+			}
+			       
+		    }
+		    return true;
+		    
+		}else{   
+		    if (value.compareTo(data) < 0){
+			return left.remove(value, this);
+		    }else{
+			return right.remove(value,this);
+		    }
+		}
+		    
+		
+	    }else{
+		return false;
+	    }
+	    
+	}
+
+	private T min(){
+	    if (left != null){
+		return left.min();
+	    }else{
+		return data;
+	    }
+	}
+	    
+
+	
 	   
 		
 		    
@@ -72,9 +169,80 @@ public class BSTree<T extends Comparable<T>>{
 
     }
 
-    private Node root; 
+    private Node root;
+    
+    public BSTree(T data){
+        root = new Node(data);
+    }
+
 
     public int getHeight(){
-	return root.height();
+	if (root != null){
+	    return root.height();
+	}else{
+	    return 0;
+	}
     }
+
+    public void add(T value){
+	if (root != null){
+	    root.add(value);
+	}else{
+	    throw new NullPointerException();
+	}
+    }
+
+    public String toString(){
+	if (root != null){
+	    return root.toString();
+	}else{
+	    throw new NullPointerException();
+	}
+    }
+       
+    
+
+    public boolean contains(T value){
+	if (root != null){
+	    return root.contains(value);
+	}else{
+	    throw new NullPointerException();
+	}
+    }
+
+    public boolean remove(T value){
+	if (root != null){
+	    Node temp = new Node(value); //random node, has no significance.
+	    temp.setLeft(root);
+	    boolean ans = root.remove(value, temp);
+	    root = temp.getLeft();
+	    return ans;
+	}else{
+	    return false;
+	}
+    }
+
+
+    // public static void main(String[] args){
+    // 	BSTree<Integer> n = new BSTree<Integer>(3);
+    // 	System.out.println(n.toString());
+    // 	n.add(4);
+    // 	n.add(6);
+    // 	n.add(7);
+    // 	n.add(2);
+    // 	n.add(1);
+    // 	System.out.println(n.toString());
+    // 	System.out.println(n.getHeight());
+    // 	n.remove(7);
+    // 	System.out.println(n.toString());
+    // 	n.remove(3);
+    // 	System.out.println(n.toString());
+    // 	System.out.println(n.remove(2));
+    // 	System.out.println(n.toString());
+    // 	System.out.println(n.remove(8));
+    // 	System.out.println(n.toString());
+
+			   
+	
+    // }
 }

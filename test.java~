@@ -1,0 +1,30 @@
+public class test{
+    
+
+    public static int nestAndBreakfast(int[] array){
+	return nestAndBreakfastH(array,0,0);
+    }
+    
+    public static int nestAndBreakfastH(int[]array, int index, int sum){
+    
+	if (index >= array.length){
+	    return sum;
+	}
+	else{
+            
+	    return Math.max( nestAndBreakfastH(array,index + 2, sum + array[index]),
+			    
+			    nestAndBreakfastH(array,index + 1, sum) 
+			     )
+		;
+	}
+    }
+    
+
+
+    public static void main(String[] args){
+	System.out.println(test.nestAndBreakfast({5, 1, 5}));
+	System.out.println(test.nestAndBreakfast({10, 4, 5,9,1}));
+	System.out.println(test.nestAndBreakfast({1,5,3}));
+    }
+}
