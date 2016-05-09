@@ -98,3 +98,61 @@ java -Xms512M -Xmx1G -XX:MaxPermSize=128M -XX:+UseConcMarkSweepGC -jar spigot-1.
 java -Xms512M -Xmx1G -XX:MaxPermSize=128M -XX:+UseConcMarkSweepGC -jar spigot-1.8.8.jar
 cd ../../
 cd mc
+git pull
+cd 12Tree/
+emacs BSTree.java
+javac BSTree.java 
+emacs BSTree.java
+emacs BSTree.java &
+javac BSTree.java 
+javac BSTree.java 
+javac BSTree.java 
+javac BSTree.java 
+javac BSTree.java 
+javac BSTree.java 
+javac BSTree.java 
+javac BSTree.java 
+javac BSTree.java 
+javac BSTree.java -Xlint:unchecked
+javac BSTree.java 
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+javac BSTree.java 
+java BSTree
+java BSTree
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+javac BSTree.java 
+java BSTree
+git add -A
+git push
+git commit -m "add remove method"
+git push
