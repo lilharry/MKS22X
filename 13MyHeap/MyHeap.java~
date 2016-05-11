@@ -118,7 +118,7 @@ public class MyHeap<T extends Comparable<T>>
 
     public T delete(){
 	if (size == 0){
-	    throw new NoSuchElementException();
+	    throw new RuntimeException("cannot delete from empty heap");
 	}
 	
 	T temp = data[1];
@@ -169,9 +169,6 @@ public class MyHeap<T extends Comparable<T>>
 	return size;
     }
     public T peek(){
-	if (size == 0){
-	    throw new NoSuchElementException();
-	}
 	return data[1];
     }
 
